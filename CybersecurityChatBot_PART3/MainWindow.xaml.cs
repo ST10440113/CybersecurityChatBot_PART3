@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Media;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +18,38 @@ namespace CybersecurityChatBot_PART3
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new Pages.HomePage());  //Default page
         }
+
+        private void GoToHome_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Pages.HomePage());
+        }
+
+        private void GoToChatPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Pages.ChatPage());
+        }
+
+        private void GoToLogPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Pages.LogPage());
+        }
+
+        private void GoToQuizPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Pages.QuizPage());
+        }
+
+        private void GoToTaskPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Pages.TaskPage());
+        }
+
+      
     }
 }
