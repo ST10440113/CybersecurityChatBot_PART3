@@ -18,15 +18,15 @@
             <TextBlock Text="Cybersecurity Chatbot" Foreground="White"  FontSize="25" FontWeight="Bold"
                    HorizontalAlignment="Center" Margin="0,40"/>
 
-            <Button Content="Home" Click="GoToHome_Click" Margin="10" Padding="10" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+           
 
-            <Button Content="Chat Bot" Click="GoToChatPage_Click" Margin="10" Padding="10" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+            <Button Content="Chat Bot" Click="GoToChatPage_Click" Margin="10" Padding="15" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
 
-            <Button Content="Activity Log" Click="GoToLogPage_Click" Margin="10" Padding="10" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+            <Button Content="Activity Log" Click="GoToLogPage_Click" Margin="10" Padding="15" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
 
-            <Button Content="Take Quiz" Click="GoToQuizPage_Click" Margin="10" Padding="10" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+            <Button Content="Take Quiz" Click="GoToQuizPage_Click" Margin="10" Padding="15" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
 
-            <Button Content="Tasks" Click="GoToTaskPage_Click" Margin="10" Padding="10" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
+            <Button Content="Tasks" Click="GoToTaskPage_Click" Margin="10" Padding="15" Background="#34495E" Foreground="White" BorderThickness="0" Cursor="Hand"/>
         </StackPanel>
 
         <!--Page Container-->

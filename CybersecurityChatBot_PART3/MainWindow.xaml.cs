@@ -22,13 +22,10 @@ namespace CybersecurityChatBot_PART3
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.HomePage());  //Default page
+            MainFrame.Navigate(new Pages.ChatPage());  //Default page
         }
 
-        private void GoToHome_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new Pages.HomePage());
-        }
+       
 
         private void GoToChatPage_Click(object sender, RoutedEventArgs e)
         {
