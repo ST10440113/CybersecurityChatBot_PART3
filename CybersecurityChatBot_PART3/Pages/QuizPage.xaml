@@ -5,22 +5,28 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CybersecurityChatBot_PART3.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="550" d:DesignWidth="1400"
+      d:DesignHeight="450" d:DesignWidth="1000"
       Title="QuizPage">
 
-    <Canvas Name="myCanvas" Background="CornflowerBlue">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
 
-        <Label Name="scoreText" FontSize="18" FontWeight="Bold">Quiz Score: 0/10</Label>
+        </Grid.RowDefinitions>
 
 
+        <!-- This is the chatbot   -->
+        <ListBox x:Name="ChatBox" Grid.Row="0" FontFamily="Consolas" FontSize="14" Margin="0,0,0,10" 
+     Background="#1e1e1e"  Foreground="White" BorderBrush="Gray" BorderThickness="1"/>
 
-        <TextBlock Name="txtQuestion" FontSize="20" FontWeight="Bold" Canvas.Left="353" Canvas.Top="114"
-                   TextWrapping="Wrap" Width="572" TextAlignment="Center" Padding="3"> 
-            Welcome to the Cybersecurity Awareness Quiz</TextBlock>
 
-        <Button Background="LightBlue" Name="ans1" FontSize="16" Content="Answer 1" Tag="0" Canvas.Left="27" Canvas.Top="240" Width="600" Height="90" Click="checkAnswer" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button Background="LightBlue" Name="ans2" FontSize="16" Content="Answer 2" Tag="0" Canvas.Left="27" Canvas.Top="369" Width="600" Height="90" Click="checkAnswer" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Button Background="LightBlue" Name="ans3" FontSize="16" Content="Answer 3" Tag="0" Canvas.Left="661" Canvas.Top="240" Width="600" Height="90" Click="checkAnswer" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Button Background="LightBlue" Name="ans4" FontSize="16" Content="Answer 4" Tag="0" Canvas.Left="661" Canvas.Top="369" Width="600" Height="90" Click="checkAnswer" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-    </Canvas>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBox x:Name="UserInput"  Width="450"  Height="30" Margin="0,0,10,0"/>
+            <Button Content="Send"  Width="100" Height="30" Click="Send_Click"/>
+        </StackPanel>
+
+    </Grid>
+
+
 </Page>

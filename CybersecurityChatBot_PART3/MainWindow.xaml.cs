@@ -47,6 +47,9 @@ namespace CybersecurityChatBot_PART3
             MainFrame.Navigate(new Pages.TaskPage());
         }
 
-      
+        private void Send_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

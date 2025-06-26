@@ -1,14 +1,47 @@
 ﻿<Page x:Class="CybersecurityChatBot_PART3.Pages.TaskPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:CybersecurityChatBot_PART3.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="TaskPage">
 
-    <Grid>
-        
+    <Grid Height="537" VerticalAlignment="Top">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#E0EAFC" Offset="0"/>
+                <GradientStop Color="#CFDEF3" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Border Margin="20,20,20,0" CornerRadius="20" Background="LightBlue" Padding="20"
+                  Height="425" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Task Manager" FontSize="22" FontWeight="Bold" Foreground="#333"
+                        HorizontalAlignment="Center" Margin="0,10"/>
+                <TextBlock Text="Add tasks, display them and mark them as completed or deleted" FontSize="20"  Foreground="#333"
+         HorizontalAlignment="Center" Margin="0,10"/>
+
+                <TextBlock Text="Task Name"  Margin="0,10,0,4" Foreground="#444"/>
+                <Border Background="#f0f0f0" CornerRadius="10" Padding="4" Margin="0,0,0,10">
+                    <TextBox x:Name="TaskNameTextBox" Background="Transparent"  BorderThickness="0"/>
+                </Border>
+
+                <TextBlock Text="Description"  Margin="0,0,0,4" Foreground="#444"/>
+                <Border Background="#f0f0f0" CornerRadius="10" Padding="4" Margin="0,0,0,10">
+                    <TextBox x:Name="DescriptionTextBox" Background="Transparent"  BorderThickness="0"/>
+                </Border>
+
+                <TextBlock Text="Reminder" Margin="0,0,0,4" Foreground="#444" />
+                <Border Background="#f0f0f0" CornerRadius="10" Padding="4" Margin="0,0,0,10">
+                    <TextBox x:Name="ReminderBox" Background="Transparent"  BorderThickness="0"/>
+                </Border>
+
+                <Button Content="Add Task" Height="40" Margin="0,20,0,0" Background="#0078D7" Foreground="White"
+                        FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="AddTask_Click"/>
+                
+                <Button Content="Display All Tasks" Height="40" Margin="0,20,0,0" Background="#0078D7" Foreground="White"
+                        FontWeight="Bold" BorderThickness="0" Cursor="Hand" Click="DisplayTasks_Click"/>
+
+               
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>

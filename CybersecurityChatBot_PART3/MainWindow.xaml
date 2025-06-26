@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CybersecurityChatBot_PART3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="900">
+        Title="MainWindow" Height="450" Width="1000">
     <Grid>
         <!--Column Layout: Sidebar and Content -->
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
 
         <!-- Sidebar -->
         <StackPanel Background="#2C3E50" VerticalAlignment="Stretch" Grid.Column="0">
-            <TextBlock Text="Cybersecurity Chatbot" Foreground="White"  FontSize="25" FontWeight="Bold"
+            <TextBlock Text="Cybersecurity Chatbot" Foreground="White"  FontSize="20" FontWeight="Bold"
                    HorizontalAlignment="Center" Margin="0,40"/>
 
            
