@@ -118,12 +118,12 @@ namespace CybersecurityChatBot_PART3.Pages
                     
                     break;
                 case 2:
-                    txtQuestion.Text = "What does VPN stand for?";
-                    ans1.Content = "Virtual Protected Network";
-                    ans2.Content = "Virtual Public Network";
-                    ans3.Content = "Virtual Private Network";
-                    ans4.Content = "Virtual Personal Network";
-                    ans3.Tag = "correct"; 
+                    txtQuestion.Text = "Antivirus software guarantees complete protection against all cyber threats";
+                    ans1.Content = "True";
+                    ans2.Content = "False";
+                    ans3.Content = "Sometimes";
+                    ans4.Content = "only on Windows";
+                    ans2.Tag = "correct"; 
                    
                     break;
                 case 3:
@@ -159,12 +159,12 @@ namespace CybersecurityChatBot_PART3.Pages
                     ans1.Tag = "correct"; 
                     break;
                 case 7:
-                    txtQuestion.Text = "What is a strong password?";
-                    ans1.Content = "123456";
-                    ans2.Content = "password";
-                    ans3.Content = "A long, unique mix of letters, numbers, and symbols";
-                    ans4.Content = "Your pet's name";
-                    ans3.Tag = "correct"; 
+                    txtQuestion.Text = "A strong password is a long, unique mix of letters, numbers, and symbols ";
+                    ans1.Content = "True";
+                    ans2.Content = "Depends on the application";
+                    ans3.Content = "False";
+                    ans4.Content = "Just letters are enough";
+                    ans1.Tag = "correct"; 
                     break;
                 case 8:
                     txtQuestion.Text = "What is phishing?";
