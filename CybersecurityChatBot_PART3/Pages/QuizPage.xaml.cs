@@ -99,8 +99,6 @@ namespace CybersecurityChatBot_PART3.Pages
                 i = questionNumbers[qNum];
             }
            
-
-           
             foreach (var x in myCanvas.Children.OfType<Button>())
             {
                 x.Tag = "0";
