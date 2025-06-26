@@ -25,8 +25,6 @@ namespace CybersecurityChatBot_PART3
             MainFrame.Navigate(new Pages.ChatPage());  //Default page
         }
 
-       
-
         private void GoToChatPage_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Navigate(new Pages.ChatPage());

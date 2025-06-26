@@ -23,13 +23,13 @@ namespace CybersecurityChatBot_PART3.Pages
     /// </summary>
     public partial class ChatPage : Page
     {
+
         static List<string> chatHistory = new List<string>();
        
         static Random random = new Random();
         private string userName = string.Empty;
-      
 
-       
+      
         public ChatPage()
         {
             InitializeComponent();
@@ -40,6 +40,8 @@ namespace CybersecurityChatBot_PART3.Pages
             AddBotMessage("What's your name?");
         }
 
+
+         
         private void Send_Click(object sender, RoutedEventArgs e)
         {
             string input = UserInput.Text.Trim().ToLower();
@@ -81,6 +83,8 @@ namespace CybersecurityChatBot_PART3.Pages
             HandleUserQuery(input, userName);
 
         }
+
+
 
         private void AddBotMessage(string message)
         {
