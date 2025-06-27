@@ -35,7 +35,7 @@ namespace CybersecurityChatBot_PART3.Pages
             DisplayAsciiLogo();
             AddBotMessage("To add a task, use this format:  I want to add a task- task name OR add a task-task name ");
             AddBotMessage("To add a reminder for a task, use this format: I want to add a reminder- reminder name OR remind me- reminder name OR set a reminder- reminder name");
-            AddBotMessage("To add a description for a task, use this format: add description- decsription ");
+            AddBotMessage("To add a description for a task, use this format: add description- description ");
             AddBotMessage("To view your tasks and reminders, type 'show all tasks'");
             AddBotMessage("What's your name?");
 
@@ -58,50 +58,7 @@ namespace CybersecurityChatBot_PART3.Pages
         }
 
 
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
-            string input = UserInput.Text.Trim();
-            if (string.IsNullOrEmpty(input)) return;
-
-            if (string.IsNullOrEmpty(userName))
-            {
-                userName = input;
-                AddBotMessage($"Hello, {userName}!");
-                UserInput.Clear();
-                return;
-            }
-
-            AddUserMessage(input);
-            UserInput.Clear();
-
-            string lowerInput = input.ToLower();
-
-            if (lowerInput == "exit" || lowerInput == "quit")
-            {
-                AddBotMessage("Stay safe and think before you click online. Goodbye!");
-                SaveTaskHistory();
-               
-                Application.Current.Shutdown();
-                return;
-            }
-
-
-            checkforTask(input);
-
-            if (input.ToLower() == "show all tasks")
-            {
-                DisplayTasks();
-                return;
-            }
-
-
-            checkforDescription(input);
-            checkforReminder(input);
-
-                
-                HandleUserQuery(input, userName);
-            }
-
+        
 
        
 
