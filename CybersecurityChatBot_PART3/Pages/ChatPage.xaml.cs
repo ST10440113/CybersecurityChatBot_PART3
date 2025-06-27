@@ -78,7 +78,7 @@ namespace CybersecurityChatBot_PART3.Pages
                 Application.Current.Shutdown();
                 return;
             }
-
+            SaveChatHistory();
             CompareChatHistoryToInput(input);
             HandleUserQuery(input, userName);
 
@@ -90,6 +90,9 @@ namespace CybersecurityChatBot_PART3.Pages
         {
            
             ChatBox.Items.Add($"ChatBot: {message}");
+            chatHistory.Add($"ChatBot: {message}");
+            SaveChatHistory();
+
 
         }
 
@@ -97,6 +100,8 @@ namespace CybersecurityChatBot_PART3.Pages
         private void AddUserMessage(string message)
         {
             ChatBox.Items.Add($"{userName}: {message}");
+            chatHistory.Add($"{userName}: {message}");
+            SaveChatHistory();
 
         }
 
@@ -207,7 +212,7 @@ _________        ___.                                                  .__  __  
 
             File.WriteAllLines(filePath, chatHistory);
 
-            AddBotMessage($"Chat history successfully saved to {filePath}");
+           
            
         }
         public void HandleUserQuery(string input, string userName)

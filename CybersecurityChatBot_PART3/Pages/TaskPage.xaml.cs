@@ -80,7 +80,7 @@ namespace CybersecurityChatBot_PART3.Pages
             {
                 AddBotMessage("Stay safe and think before you click online. Goodbye!");
                 SaveTaskHistory();
-                SaveChatHistory();
+               
                 Application.Current.Shutdown();
                 return;
             }
@@ -114,6 +114,7 @@ namespace CybersecurityChatBot_PART3.Pages
                 {
                     taskHistory.Add($"Task: {task}");
                     AddBotMessage($"Task '{task}' added successfully.");
+                    SaveTaskHistory();
                 }
                 
                 
@@ -128,6 +129,7 @@ namespace CybersecurityChatBot_PART3.Pages
                 {
                     taskHistory.Add($"Description: {description}");
                     AddBotMessage($"Description '{description}' added successfully.");
+                    SaveTaskHistory();
                 }
 
             }
@@ -142,6 +144,7 @@ namespace CybersecurityChatBot_PART3.Pages
                 {
                     taskHistory.Add($"Reminder: {reminder}");
                     AddBotMessage($"Reminder '{reminder}' added successfully.");
+                    SaveTaskHistory();
                 }
                 
             }
@@ -275,29 +278,9 @@ _________        ___.                                                  .__  __  
         public void SaveTaskHistory()
         {
             string filePath = "Task_history.txt";
-
-          
-            var taskLines = taskHistory.Where(line => line.StartsWith("I want to add a task")).ToList();
-            var TaskLines = taskHistory.Where(line => line.StartsWith("add a task")).ToList();
-            var taskLinestwo = taskHistory.Where(line => line.Contains("task")).ToList();
-            File.WriteAllLines(filePath, taskLines);
-            File.WriteAllLines(filePath, TaskLines);
-            File.WriteAllLines(filePath, taskLinestwo);
-
-            var remindLines = taskHistory.Where(line => line.StartsWith("I want to add a reminder")).ToList();
-            var RemindLines = taskHistory.Where(line => line.StartsWith("reminder")).ToList();
-            var remindLinestwo = taskHistory.Where(line => line.Contains("remind me")).ToList();
-            var remindLinesthree = taskHistory.Where(line => line.Contains("set a reminder")).ToList();
-            var remindLinesfour = taskHistory.Where(line => line.StartsWith("remind")).ToList();
-
-            File.WriteAllLines(filePath, remindLines);
-            File.WriteAllLines(filePath, RemindLines);
-            File.WriteAllLines(filePath, remindLinestwo);
-            File.WriteAllLines(filePath, remindLinesthree);
-            File.WriteAllLines(filePath, remindLinesfour);
-
-
+            File.WriteAllLines(filePath, taskHistory);
         }
+
         public void HandleUserQuery(string input, string userName)
         {
             string preparedInput = input.Trim().ToLower();

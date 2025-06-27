@@ -147,16 +147,20 @@ namespace CybersecurityChatBot_PART3.Pages
             
             
             string input = UserInput.Text.Trim().ToUpper();
+            
+            quizHistory.Add($"Question {qNum + 1}: Your answer: {input} | {(input == correctAnswer ? "Correct" : "Incorrect")}");
 
             if (input == correctAnswer)
             {
                 
                 AddBotMessage("Correct!");
                 score++;
+                SaveQuizHistory();
             }
             else
             {
                 AddBotMessage("Incorrect! The correct answer was: " + correctAnswer);
+                SaveQuizHistory();
             }
 
             qNum++;
@@ -173,25 +177,9 @@ namespace CybersecurityChatBot_PART3.Pages
                     AddBotMessage($"Your final score is: {score}/{questionNumbers.Count}\nBetter luck next time!");
                 }
 
-
-                AddBotMessage("Would you like to play again? (yes/no)");
-                string option = UserInput.Text.Trim().ToLower();
-                if (option == "yes")
-                {
-                    ResetGame();
-                }
-                else if (option == "no")
-                {
-                    AddBotMessage("Thank you for playing!");
-                    SaveQuizHistory();
-                    return;
-                }
-                score = 0;
-                qNum = 0;
-                return;
-                
             }
             NextQuestion();
+            
         }
 
         private void ResetGame()
