@@ -27,38 +27,118 @@ namespace CybersecurityChatBot_PART3.Pages
 
         static Random random = new Random();
         private string userName = string.Empty;
-
         
+
         public TaskPage()
         {
             InitializeComponent();
-            
+            DisplayAsciiLogo();
+            AddBotMessage("To add a task, use this format:  I want to add a task- task name OR add a task");
+            AddBotMessage("To add a reminder, use this format: I want to add a reminder- reminder name OR remind me- reminder name OR set a reminder- reminder name");
+            AddBotMessage("To view your tasks and reminders, type 'show tasks'");
+            AddBotMessage("What's your name?");
+
+
         }
+        public void DisplayTasks()
+        {
+            if (taskHistory.Count > 0)
+            {
+                AddBotMessage("You have the following tasks and reminders:");
+                foreach (var task in taskHistory)
+                {
+                    AddBotMessage(task);
+                }
+            }
+            else
+            {
+                AddBotMessage("You currently have no tasks or reminders.");
+            }
+        }
+
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            string input = UserInput.Text.Trim().ToLower();
-
+            string input = UserInput.Text.Trim();
             if (string.IsNullOrEmpty(input)) return;
+
+            if (string.IsNullOrEmpty(userName))
+            {
+                userName = input;
+                AddBotMessage($"Hello, {userName}!");
+                UserInput.Clear();
+                return;
+            }
+
             AddUserMessage(input);
             UserInput.Clear();
-            AddBotMessage("To add a task, use this format:  I want to add a task- task name");
 
+            string lowerInput = input.ToLower();
 
-            if (input == "exit" || input == "quit")
+            if (lowerInput == "exit" || lowerInput == "quit")
             {
-                AddBotMessage(" Stay safe and think before you click online. Goodbye!");
+                AddBotMessage("Stay safe and think before you click online. Goodbye!");
                 SaveTaskHistory();
                 SaveChatHistory();
                 Application.Current.Shutdown();
                 return;
             }
 
+           
+            if (lowerInput.StartsWith("i want to add a task"))
+            {
+                string task = input.Substring("i want to add a task".Length).TrimStart('-', ' ').Trim();
+                if (!string.IsNullOrEmpty(task))
+                {
+                    taskHistory.Add($"Task: {task}");
+                    AddBotMessage($"Task '{task}' added successfully.");
+                    SaveTaskHistory();
+                }
+                else
+                {
+                    AddBotMessage("Please provide a task name after 'I want to add a task -'.");
+                }
+                return;
+            }
+            if (lowerInput.StartsWith("add a task"))
+            {
+                string task = input.Substring("add a task".Length).TrimStart('-', ' ').Trim();
+                if (!string.IsNullOrEmpty(task))
+                {
+                    taskHistory.Add($"Task: {task}");
+                    AddBotMessage($"Task '{task}' added successfully.");
+                    SaveTaskHistory();
+                }
+                else
+                {
+                    AddBotMessage("Please provide a task name after 'add a task -'.");
+                }
+                return;
+            }
+            if (input.ToLower() == "show tasks" )
+            {
+                DisplayTasks();
+                return;
+            }
+
+            checkforReminder(input);
+
             CompareChatHistoryToInput(input);
             HandleUserQuery(input, userName);
-
         }
-
+        public void checkforReminder(string input)
+        {
+            if (input.Contains("I want to add a reminder") || input.Contains("remind me") || input.Contains("set a reminder") || input.Contains("reminder"))
+            {
+                string reminder = input.Replace("I want to add a reminder-", "").Replace("remind me", "").Replace("set a reminder", "").Replace("reminder", "").Trim();
+                if (!string.IsNullOrEmpty(reminder))
+                {
+                    taskHistory.Add($"Reminder: {reminder}");
+                    AddBotMessage($"Reminder '{reminder}' added successfully.");
+                }
+                
+            }
+        }
 
 
         private void AddBotMessage(string message)
@@ -94,7 +174,7 @@ namespace CybersecurityChatBot_PART3.Pages
         }
 
 
-        private void DisplayAsciiLogo()
+        public void DisplayAsciiLogo()
         {
             string logo = @"
                                                                                                                                                                   
@@ -120,7 +200,7 @@ _________        ___.                                                  .__  __  
             ChatBox.Items.Add(logo);
         }
 
-        private void PlayGreetingAudio(string filePath)
+        public void PlayGreetingAudio(string filePath)
         {
             try
             {
@@ -191,18 +271,18 @@ _________        ___.                                                  .__  __  
             string filePath = "Task_history.txt";
 
           
-            var taskLines = taskHistory.Where(line => line.Contains("I want to add a task")).ToList();
-            var TaskLines = taskHistory.Where(line => line.Contains("add a task")).ToList();
+            var taskLines = taskHistory.Where(line => line.StartsWith("I want to add a task")).ToList();
+            var TaskLines = taskHistory.Where(line => line.StartsWith("add a task")).ToList();
             var taskLinestwo = taskHistory.Where(line => line.Contains("task")).ToList();
             File.WriteAllLines(filePath, taskLines);
             File.WriteAllLines(filePath, TaskLines);
             File.WriteAllLines(filePath, taskLinestwo);
 
-            var remindLines = taskHistory.Where(line => line.Contains("I want to add a reminder")).ToList();
-            var RemindLines = taskHistory.Where(line => line.Contains("reminder")).ToList();
+            var remindLines = taskHistory.Where(line => line.StartsWith("I want to add a reminder")).ToList();
+            var RemindLines = taskHistory.Where(line => line.StartsWith("reminder")).ToList();
             var remindLinestwo = taskHistory.Where(line => line.Contains("remind me")).ToList();
             var remindLinesthree = taskHistory.Where(line => line.Contains("set a reminder")).ToList();
-            var remindLinesfour = taskHistory.Where(line => line.Contains("remind")).ToList();
+            var remindLinesfour = taskHistory.Where(line => line.StartsWith("remind")).ToList();
 
             File.WriteAllLines(filePath, remindLines);
             File.WriteAllLines(filePath, RemindLines);
