@@ -23,6 +23,7 @@ namespace CybersecurityChatBot_PART3.Pages
     public partial class TaskPage : Page
     {
         static List<string> chatHistory = new List<string>();
+        static List<string> taskHistory = new List<string>();
 
         static Random random = new Random();
         private string userName = string.Empty;
@@ -34,8 +35,6 @@ namespace CybersecurityChatBot_PART3.Pages
             
         }
 
-
-
         private void Send_Click(object sender, RoutedEventArgs e)
         {
             string input = UserInput.Text.Trim().ToLower();
@@ -43,31 +42,13 @@ namespace CybersecurityChatBot_PART3.Pages
             if (string.IsNullOrEmpty(input)) return;
             AddUserMessage(input);
             UserInput.Clear();
+            AddBotMessage("To add a task, use this format:  I want to add a task- task name");
 
-            if (string.IsNullOrEmpty(userName))
-            {
-                userName = input;
-                AddBotMessage($"Nice to meet you, {userName}! You can ask me about:" +
-                    $"\n" +
-                    $"\n-Cybersecurity" +
-                    $"\n-Phishing" +
-                    $"\n-Malware" +
-                    $"\n-Ransomware" +
-                    $"\n-Firewall" +
-                    $"\n-Antivirus" +
-                    $"\n-Password" +
-                    $"\n-Social Engineering" +
-                    $"\n-Data Breaches" +
-                    $"\n-Multi-Factor Authentication" +
-                    $"\n" +
-                    $"\nIf you wish to leave, you can enter the word 'exit' or 'quit'" +
-                    $"\nIf you need a reminder about what you can ask about, type the word 'help'");
-                return;
-            }
 
             if (input == "exit" || input == "quit")
             {
                 AddBotMessage(" Stay safe and think before you click online. Goodbye!");
+                SaveTaskHistory();
                 SaveChatHistory();
                 Application.Current.Shutdown();
                 return;
@@ -202,6 +183,33 @@ _________        ___.                                                  .__  __  
             File.WriteAllLines(filePath, chatHistory);
 
             AddBotMessage($"Chat history successfully saved to {filePath}");
+        
+        }
+
+        public void SaveTaskHistory()
+        {
+            string filePath = "Task_history.txt";
+
+          
+            var taskLines = taskHistory.Where(line => line.Contains("I want to add a task")).ToList();
+            var TaskLines = taskHistory.Where(line => line.Contains("add a task")).ToList();
+            var taskLinestwo = taskHistory.Where(line => line.Contains("task")).ToList();
+            File.WriteAllLines(filePath, taskLines);
+            File.WriteAllLines(filePath, TaskLines);
+            File.WriteAllLines(filePath, taskLinestwo);
+
+            var remindLines = taskHistory.Where(line => line.Contains("I want to add a reminder")).ToList();
+            var RemindLines = taskHistory.Where(line => line.Contains("reminder")).ToList();
+            var remindLinestwo = taskHistory.Where(line => line.Contains("remind me")).ToList();
+            var remindLinesthree = taskHistory.Where(line => line.Contains("set a reminder")).ToList();
+            var remindLinesfour = taskHistory.Where(line => line.Contains("remind")).ToList();
+
+            File.WriteAllLines(filePath, remindLines);
+            File.WriteAllLines(filePath, RemindLines);
+            File.WriteAllLines(filePath, remindLinestwo);
+            File.WriteAllLines(filePath, remindLinesthree);
+            File.WriteAllLines(filePath, remindLinesfour);
+
 
         }
         public void HandleUserQuery(string input, string userName)
@@ -222,8 +230,10 @@ _________        ___.                                                  .__  __  
             { "How are you?"," I'm good thanks. How can I assist you today?" },
             { "What's your purpose?","I'm here to help you stay safe online by giving cybersecurity advice" },
             { "What can I ask you about?", "You can ask me about cybersecurity, phishing,malware,ransomeware,firewall,antiviruses, passwords ,and social engineering" },
+            { "I want to add a task", "Task added" },
+            { "I want to add a reminder", "Reminder added" },
             { "help", "You can ask about cybersecurity, phishing,malware,ransomeware,firewall,antiviruses, passwords ,and social engineering" },
-            
+             
 //cybersecurity follow up questions
 { "What are the most common cyber threats", "The most common cyber threats include phishing, malware, ransomware, social engineering, and denial-of-service attacks." },
 { "How can I protect my personal information online?", "Protect your personal information by using strong passwords, enabling two-factor authentication, avoiding suspicious links, and keeping your software updated." },
@@ -353,6 +363,8 @@ _________        ___.                                                  .__  __  
 { "password", new List<string> { "strong password", "password security", "password manager", "password protection" } },
 { "social engineering", new List<string> { "social engineering attack", "manipulation", "pretexting", "baiting", "impersonation" } },
 { "data breaches", new List<string> { "data breach", "personal data exposure", "data leak", "information theft" } },
+{ "I want to add a task", new List<string> { "add a task", "task" } },
+{ "I want to add a reminder", new List<string> { "add a reminder", "reminder", "remind", "remind me", "set a reminder" } },
 { "multi-factor authentication", new List<string> { "MFA", "two-factor authentication", "2FA", "authentication app", "security token" } },
 
 //cybersecurity follow up question synonyms

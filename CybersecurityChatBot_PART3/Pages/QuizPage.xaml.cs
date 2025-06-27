@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,6 +9,7 @@ namespace CybersecurityChatBot_PART3.Pages
 {
     public partial class QuizPage : Page
     {
+        static List<string> quizHistory = new List<string>();
         List<int> questionNumbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         int qNum = 0;
         int i;
@@ -21,6 +23,15 @@ namespace CybersecurityChatBot_PART3.Pages
            
         }
 
+        public void SaveQuizHistory()
+        {
+            string filePath = "quiz_history.txt";
+
+            File.WriteAllLines(filePath, quizHistory);
+
+            
+
+        }
         private void AddBotMessage(string message)
         {
             ChatBox.Items.Add($"ChatBot: {message}");
@@ -172,6 +183,7 @@ namespace CybersecurityChatBot_PART3.Pages
                 else if (option == "no")
                 {
                     AddBotMessage("Thank you for playing!");
+                    SaveQuizHistory();
                     return;
                 }
                 score = 0;
