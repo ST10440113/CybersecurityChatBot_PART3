@@ -33,9 +33,10 @@ namespace CybersecurityChatBot_PART3.Pages
         {
             InitializeComponent();
             DisplayAsciiLogo();
-            AddBotMessage("To add a task, use this format:  I want to add a task- task name OR add a task");
-            AddBotMessage("To add a reminder, use this format: I want to add a reminder- reminder name OR remind me- reminder name OR set a reminder- reminder name");
-            AddBotMessage("To view your tasks and reminders, type 'show tasks'");
+            AddBotMessage("To add a task, use this format:  I want to add a task- task name OR add a task-task name ");
+            AddBotMessage("To add a reminder for a task, use this format: I want to add a reminder- reminder name OR remind me- reminder name OR set a reminder- reminder name");
+            AddBotMessage("To add a description for a task, use this format: add description- decsription ");
+            AddBotMessage("To view your tasks and reminders, type 'show all tasks'");
             AddBotMessage("What's your name?");
 
 
@@ -84,48 +85,54 @@ namespace CybersecurityChatBot_PART3.Pages
                 return;
             }
 
-           
-            if (lowerInput.StartsWith("i want to add a task"))
-            {
-                string task = input.Substring("i want to add a task".Length).TrimStart('-', ' ').Trim();
-                if (!string.IsNullOrEmpty(task))
-                {
-                    taskHistory.Add($"Task: {task}");
-                    AddBotMessage($"Task '{task}' added successfully.");
-                    SaveTaskHistory();
-                }
-                else
-                {
-                    AddBotMessage("Please provide a task name after 'I want to add a task -'.");
-                }
-                return;
-            }
-            if (lowerInput.StartsWith("add a task"))
-            {
-                string task = input.Substring("add a task".Length).TrimStart('-', ' ').Trim();
-                if (!string.IsNullOrEmpty(task))
-                {
-                    taskHistory.Add($"Task: {task}");
-                    AddBotMessage($"Task '{task}' added successfully.");
-                    SaveTaskHistory();
-                }
-                else
-                {
-                    AddBotMessage("Please provide a task name after 'add a task -'.");
-                }
-                return;
-            }
-            if (input.ToLower() == "show tasks" )
+
+            checkforTask(input);
+
+            if (input.ToLower() == "show all tasks")
             {
                 DisplayTasks();
                 return;
             }
 
+
+            checkforDescription(input);
             checkforReminder(input);
 
-            CompareChatHistoryToInput(input);
-            HandleUserQuery(input, userName);
+                
+                HandleUserQuery(input, userName);
+            }
+
+
+       
+
+        public void checkforTask(string input)
+        {
+            if (input.Contains("I want to add a task") || input.Contains("add a task"))
+            {
+                string task = input.Replace("I want to add a task-", "").Replace("add a task", "").Trim();
+                if (!string.IsNullOrEmpty(task))
+                {
+                    taskHistory.Add($"Task: {task}");
+                    AddBotMessage($"Task '{task}' added successfully.");
+                }
+                
+                
+            }
         }
+        public void checkforDescription(string input)
+        {
+            if (input.Contains("add description") )
+            {
+                string description = input.Replace("add description", "").Trim();
+                if (!string.IsNullOrEmpty(description))
+                {
+                    taskHistory.Add($"Description: {description}");
+                    AddBotMessage($"Description '{description}' added successfully.");
+                }
+
+            }
+        }
+
         public void checkforReminder(string input)
         {
             if (input.Contains("I want to add a reminder") || input.Contains("remind me") || input.Contains("set a reminder") || input.Contains("reminder"))
@@ -139,8 +146,7 @@ namespace CybersecurityChatBot_PART3.Pages
                 
             }
         }
-
-
+       
         private void AddBotMessage(string message)
         {
 
@@ -310,8 +316,7 @@ _________        ___.                                                  .__  __  
             { "How are you?"," I'm good thanks. How can I assist you today?" },
             { "What's your purpose?","I'm here to help you stay safe online by giving cybersecurity advice" },
             { "What can I ask you about?", "You can ask me about cybersecurity, phishing,malware,ransomeware,firewall,antiviruses, passwords ,and social engineering" },
-            { "I want to add a task", "Task added" },
-            { "I want to add a reminder", "Reminder added" },
+            
             { "help", "You can ask about cybersecurity, phishing,malware,ransomeware,firewall,antiviruses, passwords ,and social engineering" },
              
 //cybersecurity follow up questions
@@ -443,8 +448,7 @@ _________        ___.                                                  .__  __  
 { "password", new List<string> { "strong password", "password security", "password manager", "password protection" } },
 { "social engineering", new List<string> { "social engineering attack", "manipulation", "pretexting", "baiting", "impersonation" } },
 { "data breaches", new List<string> { "data breach", "personal data exposure", "data leak", "information theft" } },
-{ "I want to add a task", new List<string> { "add a task", "task" } },
-{ "I want to add a reminder", new List<string> { "add a reminder", "reminder", "remind", "remind me", "set a reminder" } },
+
 { "multi-factor authentication", new List<string> { "MFA", "two-factor authentication", "2FA", "authentication app", "security token" } },
 
 //cybersecurity follow up question synonyms
