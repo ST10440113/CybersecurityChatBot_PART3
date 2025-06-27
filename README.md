@@ -59,3 +59,7 @@ This page is where the user will be able to see all of their recent activities t
 The user will be able to view their recent activities by typing commands that are specified on the interface.
 It is implemented in the chatbot structure.
 The interface for this page is the same as the chatbot page
+
+5. Youtube Link
+-----------------
+https://youtu.be/CLn4TIvN4nA
