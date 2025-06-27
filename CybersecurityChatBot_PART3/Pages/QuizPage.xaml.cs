@@ -190,7 +190,6 @@ namespace CybersecurityChatBot_PART3.Pages
                 qNum = 0;
                 return;
                 
-                
             }
             NextQuestion();
         }
